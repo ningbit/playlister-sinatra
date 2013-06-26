@@ -1,0 +1,6 @@
+<h1> Genres </h1>
+
+<ul>
+<% @genres.each do |genre| %>
+  <li> <a href="/genres/<%=genre.name.gsub(" ","_")%>"><%= genre.name %><a/> </li>
+<% end %>

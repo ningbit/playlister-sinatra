@@ -1,0 +1,11 @@
+<h1><%= @artist.name %>'s Songs </h1>
+
+<ul>
+  <% @artist.songs.each do |song| %>
+    <li><%=song.name%></li>
+
+      <iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/<%= YoutubeSearch.search("#{@artist.name}" "#{song.name}").first["id"].split("/").last %>" allowfullscreen frameborder="0">
+      </iframe>
+  <% end %>
+</ul>
+

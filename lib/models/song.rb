@@ -1,3 +1,9 @@
+require_relative '../concerns/memorable'
+require_relative '../concerns/listable'
+require_relative '../concerns/findable'
+require_relative '../concerns/sluggable'
+
+
 class Song
   attr_accessor :artist, :genre, :name
 

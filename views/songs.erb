@@ -1,0 +1,6 @@
+<h1> Songs </h1>
+
+<ul>
+<% @songs.each do |song| %>
+  <li> <a href="/songs/<%=song.name.gsub(" ","_")%>"><%= song.name %><a/> </li>
+<% end %>
