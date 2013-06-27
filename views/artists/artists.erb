@@ -1,10 +1,9 @@
-<% btn_array = ["btn-primary","btn-danger",""] %>
 <div class="container">
 <h1>All Artists > </h1>
 </br>
 
 <div class="alignrightcontents">
-<% @artists.each_with_index do |artist,index| %>
+<% @artists.each do |artist| %>
   <button class="btn btn-large"><a href="/artists/<%=artist.name.gsub(" ","_")%>"><%= artist.name %><a/></button>
 <% end %>
 </div>

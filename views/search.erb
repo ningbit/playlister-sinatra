@@ -1,0 +1,26 @@
+<div class="container">
+<% if @artists.size != 0 %>
+  <h1>Search: Artists > "<%=@search%>"</h1>
+  </br>
+
+  <div>
+    <% @artists.each do |artist| %>
+      <button class="btn btn-large"><a href="/artists/<%=artist.name.gsub(" ","_")%>"><%= artist.name %></a></button>
+    <% end %>
+  </div>
+  </br>
+<% end %>
+<% if @songs.size != 0 %>
+
+  <h1>Search: Songs > "<%=@search%>"</h1>
+  </br>
+  <div>
+    <% @songs.each do |song| %>
+      <button class="btn btn-large"><a href="/songs/<%=song.name.gsub(" ","_")%>"><%= song.name %><a/></button>
+    <% end %>
+  </div>
+<% end %>
+<% if @songs.size == 0 && @artists.size == 0 %>
+  <h1>Search: No Results Found for "<%=@search %>"</h1>
+<% end %>
+</div>

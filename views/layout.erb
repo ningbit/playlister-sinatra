@@ -8,7 +8,7 @@
     body {
     padding-top: 60px; /* When using the navbar-top-fixed */
     }
-    
+
     .center {
      float: none;
      margin-left: auto;
@@ -26,7 +26,7 @@
     body
     {
     background-image:url('/img/escheresque_ste.png');
-    
+
     }
 </style>
 
@@ -65,8 +65,8 @@
           </li>
           <li><a href="/random">Shuffle</a></li>
         </ul>
-        <form class="navbar-search" action="">
-          <input type="text" class="search-query span2" placeholder="Search">
+        <form class="navbar-search" action="/search" method="GET">
+          <input type="text" class="search-query span4" placeholder="Search" name="search">
         </form>
       </div><!-- /.nav-collapse -->
     </div><!-- /.container -->

@@ -2,6 +2,7 @@ require_relative '../concerns/memorable'
 require_relative '../concerns/listable'
 require_relative '../concerns/findable'
 require_relative '../concerns/sluggable'
+require_relative '../concerns/searchable'
 
 
 class Song
@@ -15,6 +16,7 @@ class Song
 
   extend Listable
   extend Findable
+  extend Searchable
 
   reset_all
 

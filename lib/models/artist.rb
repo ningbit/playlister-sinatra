@@ -2,6 +2,7 @@ require_relative '../concerns/memorable'
 require_relative '../concerns/listable'
 require_relative '../concerns/findable'
 require_relative '../concerns/sluggable'
+require_relative '../concerns/searchable'
 
 class Artist
   attr_accessor :name, :songs
@@ -14,6 +15,7 @@ class Artist
 
   extend Listable
   extend Findable
+  extend Searchable
 
   def self.reset_artists
     reset_all
