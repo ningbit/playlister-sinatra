@@ -14,3 +14,9 @@ end
 Dir.glob('./lib/models/*.rb').each do |model|
   require model
 end
+
+Dir.glob('/lib').each do |folder|
+  Dir.glob(folder + "/*.rb}").each do |file|
+    require file
+  end
+end

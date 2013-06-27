@@ -1,0 +1,17 @@
+<div class="container">
+<h1> Add Artist</h1>
+<form action="/edit/confirmation" method="POST">
+  <label>Name</label>
+  <input type='text' name="name"><br>
+  <label>Song</label>
+  <input type='text' name="song"><br>
+  <label>Genre</label>
+  <select type='text' name="genre"><br>
+    <% @genres = Genre.all.sort_by { |g| g.name }%>
+      <% @genres.each do |genre| %>
+                <option value="<%=genre.name%>"><%= genre.name.capitalize%></option>
+              <% end %>
+  </select></br></br>
+  <button class='btn btn-medium' type='submit' value='submit'>Submit</button><br>
+</form>
+</div>

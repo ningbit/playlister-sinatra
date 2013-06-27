@@ -1,0 +1,8 @@
+<div class="container">
+  <% if @artist.nil? %>
+    <h1>Add Failed</h1>
+  <% else %>
+    <h1>Artist: <%= @artist.name %> has been added!</h1>
+    <button class="btn btn-large"><a href="/artists/<%=@artist.name.gsub(" ","_")%>"><%= @artist.name %><a/></button>
+  <%end%>
+</div>

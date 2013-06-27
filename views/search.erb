@@ -16,7 +16,7 @@
   </br>
   <div>
     <% @songs.each do |song| %>
-      <button class="btn btn-large"><a href="/songs/<%=song.name.gsub(" ","_")%>"><%= song.name %><a/></button>
+      <button class="btn btn-medium"><a href="/songs/<%=song.name.gsub(" ","_")%>"><%= song.artist.name + " - " + song.name %><a/></button>
     <% end %>
   </div>
 <% end %>

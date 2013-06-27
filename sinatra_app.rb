@@ -23,14 +23,47 @@ class PlaylisterApp < Sinatra::Base
     @search = params[:search]
     @artists = Artist.search_by_first_char(@search)
     @songs = Song.search_by_first_char(@search)
-    @artists.concat Artist.search_by_string(@search)
-    @songs.concat Song.search_by_string(@search)
+    @artists.concat Artist.search_by_string(@search) if @search.size > 1
+    @songs.concat Song.search_by_string(@search) if @search.size > 1
     erb :'/search'
   end
 
   get '/random' do
     @song = Song.random
     erb :'/songs/song'
+  end
+
+  get '/artists/add' do
+    erb :'/edit/add'
+  end
+
+  get '/artists/drop' do
+    erb :'/edit/drop'
+  end
+
+  get '/songs/add' do
+    erb :'/edit/add'
+  end
+
+  get '/songs/drop' do
+    erb :'/edit/drop'
+  end
+
+  post '/edit/confirmation' do
+    if params[:name].size != 0 && params[:song].size != 0
+      artist = Artist.new
+      song = Song.new
+      genre = Genre.find_by_name(params[:genre])
+      artist.name = params[:name]
+      song.name = params[:song]
+      song.genre = genre
+      artist.add_song(song)
+      @artist = artist
+    else
+      @artist = nil
+    end
+    debugger
+    erb :'/edit/confirmation'
   end
 
   get '/artists' do
