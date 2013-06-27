@@ -19,24 +19,34 @@ class PlaylisterApp < Sinatra::Base
     erb :'home'
   end
 
+  post '/search' do
+    debugger
+    @search = params[:search]
+  end
+
+  get '/random' do
+    @song = Song.random
+    erb :'/songs/song'
+  end
+
   get '/artists' do
     @artists = Artist.all
     erb :'artists'
   end
 
   get '/artists/:name' do
-    debugger
     @artist = Artist.find_by_name(params[:name].gsub("_"," "))
     erb :'/artists/artist'
   end
 
   get '/songs' do
-    @songs = Song.all
+    @songs = Song.all.sort_by { |e| e.name }
     erb :'/songs'
   end
 
   get '/songs/:name' do
-    @song = Song.find_by_name(params[:name].gsub("_"," "))
+    song_name = params[:name]
+    @song = Song.find_by_name(params[:name].split("_-_").last.gsub("_"," "))
     erb :'/songs/song'
   end
 
@@ -44,4 +54,10 @@ class PlaylisterApp < Sinatra::Base
     @genres = Genre.all
     erb :'/genres'
   end
+
+  get '/genres/:name' do
+    @genre = Genre.find_by_name(params[:name].gsub("_"," "))
+    erb :'/genres/genre'
+  end
+
 end

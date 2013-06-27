@@ -1,6 +1,11 @@
 <h1>Welcome to the Playlist</h1>
 
 <p> Search by Artists, Songs or Genres
+<form action="/search" method="POST">
+  <label>Search</label>
+  <input type='text' name="search">
+  <button type='submit' value='submit'>Submit</button><br>
+</form>
   <ul>
     <li><a href="/artists">Artists</a></li>
     <li><a href="/songs">Songs</a></li>

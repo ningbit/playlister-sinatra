@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!-- Styles -->
+<link href="/css/bootstrap.css" rel="stylesheet">
+<link href="/css/bootstrap-responsive.css" rel="stylesheet">
+<style>
+    body {
+    padding-top: 60px; /* When using the navbar-top-fixed */
+    }
+    
+    .center {
+     float: none;
+     margin-left: auto;
+     margin-right: auto;
+    }
+
+    .centercontents {
+    text-align: center !important;
+    }
+
+    .alignrightcontents {
+    text-align: right !important;
+    }
+
+    body
+    {
+    background-image:url('/img/escheresque_ste.png');
+    
+    }
+</style>
+
+</head>
+<body>
+  <div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="/random">Playlister  <img src="/img/youtube_icon_small.gif"></a>
+      <div class="nav-collapse">
+        <ul class="nav">
+<!--           <li class="active"><a href="#"><i class="icon-home icon-white"></i> Home</a></li> -->
+          <li><a href="/artists">Artists</a></li>
+          <li><a href="/songs">Songs</a></li>
+<!--           <li><a href="/genres">Genres</a></li> -->
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">Genres <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <% @genres = Genre.all.sort_by { |g| g.name }%>
+              <% @genres.each do |genre| %>
+                <li><a href="/genres/<%=genre.name.gsub(" ","_")%>"><%= "#{genre.name.capitalize} (#{genre.songs.count})" %></a></li>
+              <% end %>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">Library <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Add Artist or Song</a></li>
+              <li><a href="#">Delete Artist or Song</a></li>
+            </ul>
+          </li>
+          <li><a href="/random">Shuffle</a></li>
+        </ul>
+        <form class="navbar-search" action="">
+          <input type="text" class="search-query span2" placeholder="Search">
+        </form>
+      </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+  </div><!-- /.navbar-inner -->
+</div><!-- /.navbar -->
+<%= yield %>
+
+<!-- jQuery via Google + local fallback, see h5bp.com -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-1.7.1.min.js"><\/script>')</script>
+
+<!-- Bootstrap jQuery Plugins, compiled and minified -->
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

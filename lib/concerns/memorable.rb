@@ -21,5 +21,9 @@ module Memorable
     def all
       @all
     end
+
+    def random
+      @all[rand(@all.size)]
+    end
   end
 end

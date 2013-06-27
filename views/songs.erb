@@ -1,6 +1,10 @@
-<h1> Songs </h1>
+<div class="container">
+<h1> All Songs > </h1>
+</br>
 
-<ul>
+<div class="alignrightcontents">
 <% @songs.each do |song| %>
-  <li> <a href="/songs/<%=song.name.gsub(" ","_")%>"><%= song.name %><a/> </li>
+  <button class="btn btn-medium"><a href="/songs/<%=song.artist.name.gsub(" ","_") + "_-_" + song.name.gsub(" ","_")%>"><%=song.artist.name + " - " + song.name %><a/></button>
 <% end %>
+</div>
+</div>
