@@ -25,5 +25,9 @@ module Memorable
     def random
       @all[rand(@all.size)]
     end
+
+    def delete(artist_obj)
+      @all.delete(artist_obj)
+    end
   end
 end

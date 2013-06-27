@@ -3,6 +3,13 @@
     <h1>Add Failed</h1>
   <% else %>
     <h1>Artist: <%= @artist.name %> has been added!</h1>
-    <button class="btn btn-large"><a href="/artists/<%=@artist.name.gsub(" ","_")%>"><%= @artist.name %><a/></button>
+    <button class="btn btn-large"><a href="/artists/<%=@artist.name.gsub(" ","_")%>"><%= @artist.name %></a></button>
   <%end%>
+  </br>
+
+  <% if @new_song %>
+  <h1>Song: <%= @new_song.name %> has been added!</h1>
+  </br>
+  <button class="btn btn-medium"><a href="/songs/<%=@artist.name.gsub(" ","_") + "_-_" + @new_song.name.gsub(" ","_")%>"><%=@artist.name + " - " + @new_song.name %><a/></button>
+  <% end %>
 </div>

@@ -16,7 +16,7 @@ class PlaylisterApp < Sinatra::Base
   end
 
   get '/' do
-    erb :'home'
+    erb :'/artists/artists'
   end
 
   get '/search' do
@@ -38,7 +38,13 @@ class PlaylisterApp < Sinatra::Base
   end
 
   get '/artists/drop' do
+    @artists = Artist.all
     erb :'/edit/drop'
+  end
+
+  get '/artists/:name/drop' do
+    @artist = Artist.find_by_name(params[:name].gsub("_"," "))
+    erb :'/edit/drop_confirmation'
   end
 
   get '/songs/add' do
@@ -49,20 +55,28 @@ class PlaylisterApp < Sinatra::Base
     erb :'/edit/drop'
   end
 
+  get '/drop/:name' do
+    Artist.delete(Artist.find_by_name(params[:name].gsub("_"," ")))
+    @artists = Artist.all
+    erb :'/artists/artists'
+  end
+
   post '/edit/confirmation' do
-    if params[:name].size != 0 && params[:song].size != 0
+    if params[:name].size != 0
       artist = Artist.new
-      song = Song.new
-      genre = Genre.find_by_name(params[:genre])
-      artist.name = params[:name]
-      song.name = params[:song]
-      song.genre = genre
-      artist.add_song(song)
+      if params[:song].size != 0
+        song = Song.new
+        genre = Genre.find_by_name(params[:genre])
+        artist.name = params[:name]
+        song.name = params[:song]
+        song.genre = genre
+        artist.add_song(song)
+        @new_song = song
+      end
       @artist = artist
     else
       @artist = nil
     end
-    debugger
     erb :'/edit/confirmation'
   end
 

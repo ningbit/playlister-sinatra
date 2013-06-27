@@ -1,0 +1,7 @@
+<div class="container">
+    <h1>Confirm Drop?:</h1>
+    <h1><%= @artist.name %></h1>
+  </br>
+    <button class="btn btn-large btn-danger"><a href="/drop/<%=@artist.name.gsub(" ","_")%>">Drop<a/></button>
+    <button class="btn btn-large"><a href="/artists">Cancel</a></button>
+</div>
