@@ -1,0 +1,7 @@
+<div class="container">
+<% if @genre %>
+<h1>Genre: <%=@genre.name.capitalize %> has been successfully created</h1>
+<% else %>
+<h1>Error: No genre was created<h1>
+<% end %>
+</div>

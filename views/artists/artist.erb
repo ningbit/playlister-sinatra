@@ -1,12 +1,15 @@
 <div class="container">
-<h1><%= @artist.name %></h1>
+<h1><%= @artist.name %> <button class="btn btn-mini"><a href="/artists/<%=@artist.name.gsub(" ","_")%>/add">Add Song</a></button></h1>
 
+  <% if @artist.songs.size == 0 %>
+  <h3> Artist has no songs </h3>
+  <% else %>
+    <% @artist.songs.each do |song| %>
+    <div><h3><%=song.name%></h3></div>
 
-  <% @artist.songs.each do |song| %>
-  <div><h3><%=song.name%></h3></div>
-
-      <iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/<%= YoutubeSearch.search("#{@artist.name}" "#{song.name}").first["id"].split("/").last %>" allowfullscreen frameborder="0">
-      </iframe>
+        <iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/<%= YoutubeSearch.search("#{@artist.name}" "#{song.name}").first["id"].split("/").last %>" allowfullscreen frameborder="0">
+        </iframe>
+    <% end %>
   <% end %>
 </div>
 

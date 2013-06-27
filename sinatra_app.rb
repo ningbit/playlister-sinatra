@@ -16,6 +16,12 @@ class PlaylisterApp < Sinatra::Base
   end
 
   get '/' do
+    @artists = Artist.all
+    erb :'/artists/artists'
+  end
+
+  get '/artists' do
+    @artists = Artist.all
     erb :'/artists/artists'
   end
 
@@ -47,27 +53,51 @@ class PlaylisterApp < Sinatra::Base
     erb :'/edit/drop_confirmation'
   end
 
+  get '/artists/:name/add' do
+    @artist = Artist.find_by_name(params[:name].gsub("_"," "))
+    erb :'/edit/add_song_artist'
+  end
+
+  get '/songs/:name/drop' do
+    @song = Song.find_by_name(params[:name].gsub("_"," "))
+    erb :'/edit/drop_song_confirmation'
+  end
+
   get '/songs/add' do
-    erb :'/edit/add'
+    @artists = Artist.all
+    erb :'/edit/add_song'
   end
 
   get '/songs/drop' do
-    erb :'/edit/drop'
+    @songs = Song.all
+    erb :'/edit/drop_song'
   end
 
-  get '/drop/:name' do
+  get '/drop/artists/:name' do
     Artist.delete(Artist.find_by_name(params[:name].gsub("_"," ")))
     @artists = Artist.all
     erb :'/artists/artists'
   end
 
+  get '/drop/songs/:name' do
+    Song.delete(Song.find_by_name(params[:name].gsub("_"," ")))
+    @songs = Song.all
+    erb :'/songs/songs'
+  end
+
   post '/edit/confirmation' do
     if params[:name].size != 0
-      artist = Artist.new
+      if Artist.find_by_name(params[:name])
+        artist = Artist.find_by_name(params[:name])
+        @artist_exist = true
+      else
+        artist = Artist.new
+        @artist_exist = false
+      end
+      artist.name ||= params[:name]
       if params[:song].size != 0
         song = Song.new
         genre = Genre.find_by_name(params[:genre])
-        artist.name = params[:name]
         song.name = params[:song]
         song.genre = genre
         artist.add_song(song)
@@ -80,9 +110,21 @@ class PlaylisterApp < Sinatra::Base
     erb :'/edit/confirmation'
   end
 
-  get '/artists' do
-    @artists = Artist.all
-    erb :'/artists/artists'
+  post '/edit/song_confirmation' do
+    artist = Artist.find_by_name(params[:name])
+    if params[:song].size != 0
+      song = Song.new
+      genre = Genre.find_by_name(params[:genre])
+      artist.name = params[:name]
+      song.name = params[:song]
+      song.genre = genre
+      artist.add_song(song)
+      @new_song = song
+      @artist = artist
+    else
+      @artist = nil
+    end
+    erb :'/edit/song_confirmation'
   end
 
   get '/artists/:name' do
@@ -109,6 +151,14 @@ class PlaylisterApp < Sinatra::Base
   get '/genres/:name' do
     @genre = Genre.find_by_name(params[:name].gsub("_"," "))
     erb :'/genres/genre'
+  end
+
+  post '/edit/genre_confirmation' do
+    if !Genre.find_by_name(params[:genre].downcase.gsub("_"," "))
+      @genre = Genre.new
+      @genre.name = params[:genre].downcase.gsub("_"," ")
+    end
+    erb :'/edit/genre_confirmation'
   end
 
 end

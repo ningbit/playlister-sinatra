@@ -1,8 +1,8 @@
 <div class="container">
-<h1><%= @song.artist.name %></h1>
+<h1><a href="/artists/<%=@song.artist.name.gsub(" ","_")%>" style="color: rgb(181, 181, 181)"><%= @song.artist.name %></a> <button class="btn btn-mini"><a href="/artists/<%=@song.artist.name.gsub(" ","_")%>/add">Add Song</a></button></h1>
 
 <h3><%= @song.name %></h3>
 
-<iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/<%= YoutubeSearch.search("#{@song.artist.name}" "#{@song.name}").first["id"].split("/").last %>" allowfullscreen frameborder="0">
+<iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/<%= YoutubeSearch.search("#{@song.artist.name}" "#{@song.name}").first["id"].split("/").last if YoutubeSearch.search("#{@song.artist.name}" "#{@song.name}").first%>" allowfullscreen frameborder="0">
 </iframe>
 </div>

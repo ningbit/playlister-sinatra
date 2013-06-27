@@ -1,6 +1,23 @@
-<h1> Genres </h1>
-
-<ul>
-<% @genres.each do |genre| %>
-  <li> <a href="/genres/<%=genre.name.gsub(" ","_")%>"><%= genre.name %><a/> </li>
-<% end %>
+<div class="container">
+  <h1> Add a Genre </h1>
+    <form action="/edit/genre_confirmation" method="POST" class="span3">
+      <label><h4>Genre</h4></label>
+      <input type='text' name="genre">
+      <button class='btn btn-small' type='submit' value='submit'>Submit</button><br>
+    </form>
+  </br>
+  </br>
+  </br>
+</div>
+  </br>
+  </br>
+<div class="container">
+  <h1>Existing Genres</h1>
+  </br>
+  </br>
+  <div>
+  <% @genres.each do |genre| %>
+    <button class="btn btn-large"><a href="/genres/<%=genre.name.gsub(" ","_")%>"><%= genre.name %><a/></button>
+  <% end %>
+  </div>
+</div>

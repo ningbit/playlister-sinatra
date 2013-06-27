@@ -1,10 +1,14 @@
 <div class="container">
-<h1> Add Artist</h1>
+<h1> Add Song</h1>
 </br>
-<form action="/edit/confirmation" method="POST" class="span3">
+<form action="/edit/song_confirmation" method="POST" class="span3">
   <label>Name</label>
-  <input type='text' name="name"><br>
-  <label>Song (optional)</label>
+  <select type='text' name="name"><br>
+      <% @artists.each do |artist| %>
+        <option value="<%=artist.name%>"><%= artist.name%></option>
+      <% end %>
+  </select></br>
+  <label>Song</label>
   <input type='text' name="song"><br>
   <label>Genre</label>
   <select type='text' name="genre"><br>

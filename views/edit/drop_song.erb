@@ -1,0 +1,11 @@
+<div class="container">
+<h1>Drop Song > </h1>
+</br>
+
+<h3>Select Song to Drop<h3>
+<div class="alignrightcontents">
+<% @songs.each do |song| %>
+  <button class="btn btn-medium btn-danger"><a href="/songs/<%=song.name.gsub(" ","_")%>/drop"><%=song.artist.name + " - " + song.name %><a/></button>
+<% end %>
+</div>
+</div>

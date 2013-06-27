@@ -1,8 +1,7 @@
-<% btn_array = ["btn-primary","btn-danger",""] %>
 <div class="container">
 <h1>Genre: <%=@genre.name.capitalize %> (<%=@genre.songs.count%> Songs) ></h1>
 </br>
-<div class="alignrightcontents">
+<div>
   <% @genre.songs.sort_by { |s| s.name.size }.each do |song|%>
   <button class="btn btn-medium"><a href="/songs/<%=song.artist.name.gsub(" ","_") + "_-_" + song.name.gsub(" ","_")%>"><%= "#{song.artist.name} - #{song.name}" %></a></button>
   <% end %>

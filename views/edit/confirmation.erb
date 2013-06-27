@@ -1,14 +1,20 @@
 <div class="container">
   <% if @artist.nil? %>
     <h1>Add Failed</h1>
+  <% elsif @artist_exist %>
+      <h1>Artist: "<%= @artist.name %>" has been updated!</h1>
+    </br>
+    <button class="btn btn-large"><a href="/artists/<%=@artist.name.gsub(" ","_")%>"><%= @artist.name %></a></button>
   <% else %>
-    <h1>Artist: <%= @artist.name %> has been added!</h1>
+    <h1>Artist: "<%= @artist.name %>" has been added!</h1>
+    </br>
     <button class="btn btn-large"><a href="/artists/<%=@artist.name.gsub(" ","_")%>"><%= @artist.name %></a></button>
   <%end%>
   </br>
+  </br>
 
   <% if @new_song %>
-  <h1>Song: <%= @new_song.name %> has been added!</h1>
+  <h1>Song: "<%= @new_song.name %>" has been added!</h1>
   </br>
   <button class="btn btn-medium"><a href="/songs/<%=@artist.name.gsub(" ","_") + "_-_" + @new_song.name.gsub(" ","_")%>"><%=@artist.name + " - " + @new_song.name %><a/></button>
   <% end %>
