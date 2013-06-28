@@ -1,13 +1,10 @@
 require 'sinatra/base'
-# require 'debugger'
+require 'debugger'
 require 'youtube_search'
 require_relative './lib/models/artist.rb'
 require_relative './lib/models/genre.rb'
 require_relative './lib/models/song.rb'
 require_relative './lib/models/library_parser.rb'
-
-
-
 
 class PlaylisterApp < Sinatra::Base
 
@@ -16,12 +13,21 @@ class PlaylisterApp < Sinatra::Base
   end
 
   get '/' do
-    @artists = Artist.all
-    erb :'/artists/artists'
+    @artists = Artist.all.sample(10)
+    @songs = Song.all.sample(10)
+    @song = Song.random
+    erb :'/home'
+  end
+
+    get '/home' do
+    @artists = Artist.all.sample(10)
+    @songs = Song.all.sample(10)
+    @song = Song.random
+    erb :'/home'
   end
 
   get '/artists' do
-    @artists = Artist.all
+    @artists = Artist.all.sort_by {|e| e.name}
     erb :'/artists/artists'
   end
 

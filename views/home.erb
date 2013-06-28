@@ -1,14 +1,27 @@
-<h1>Welcome to the Playlist</h1>
+<div class="container">
+  <h1>Playlister YouTube Dashboard</h1>
+  <h3><%=Artist.count%> Artists, <%=Song.count%> Songs, <%=Genre.count%> Genres</h3>
+  </br>
+  <div class="span6" style="text-align: right">
 
-<p> Search by Artists, Songs or Genres
-<form action="/search" method="POST">
-  <label>Search</label>
-  <input type='text' name="search">
-  <button type='submit' value='submit'>Submit</button><br>
-</form>
-  <ul>
-    <li><a href="/artists">Artists</a></li>
-    <li><a href="/songs">Songs</a></li>
-    <li><a href="/genres">Genres</a></li>
-  </ul>
-</p>
+
+    <h3>10 Random Artists</h3>
+    <% @artists.each do |artist| %>
+      <button class="btn btn-medium"><a href="/artists/<%=artist.name.gsub(" ","_")%>"><%= artist.name %></a></button>
+    <% end %>
+    </br>
+    </br>
+
+    <h3>10 Random Songs</h3>
+    <% @songs.each do |song| %>
+      <button class="btn btn-small"><a href="/songs/<%=song.artist.name.gsub(" ","_") + "_-_" + song.name.gsub(" ","_")%>"><%=song.artist.name + " - " + song.name %><a/></button>
+    <% end %>
+  </div>
+  <div class="span4">
+  </br>
+  </br>
+  </br>
+    <iframe class="youtube-player" type="text/html" width="448" height="269.5" src="http://www.youtube.com/embed/<%= YoutubeSearch.search("#{@song.artist.name}" "#{@song.name}").first["id"].split("/").last if YoutubeSearch.search("#{@song.artist.name}" "#{@song.name}").first%>" allowfullscreen frameborder="0">
+</iframe>
+  </div>
+</div>

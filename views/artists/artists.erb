@@ -4,7 +4,7 @@
 
 <div class="alignrightcontents">
 <% @artists.each do |artist| %>
-  <button class="btn btn-large"><a href="/artists/<%=artist.name.gsub(" ","_")%>"><%= artist.name %><a/></button>
+  <button class="btn btn-large"><a href="/artists/<%=artist.name.gsub(" ","_")%>"><%= artist.name %></a></button>
 <% end %>
 </div>
 </div>
