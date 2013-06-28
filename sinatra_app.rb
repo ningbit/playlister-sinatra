@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require 'debugger'
+# require 'debugger'
 require 'youtube_search'
 require_relative './lib/models/artist.rb'
 require_relative './lib/models/genre.rb'
